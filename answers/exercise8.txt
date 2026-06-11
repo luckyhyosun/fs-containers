@@ -1,0 +1,61 @@
+$ docker compose -f docker-compose.dev.yml up -d
+ Container todo-backend-mongo-1 Creating
+ Container todo-backend-mongo-1 Created
+ Container todo-backend-mongo-1 Starting
+ Container todo-backend-mongo-1 Started
+
+$ docker exec -it todo-backend-mongo-1 mongosh --authenticationDatabase admin -u root -p example
+
+> show dbs
+admin         100.00 KiB
+config         48.00 KiB
+local          72.00 KiB
+the_database   40.00 KiB
+
+> use the_database
+switched to db the_database
+
+> show collections
+todos
+
+> db.todos.find({})
+[
+  {
+    _id: ObjectId('6a28575ad01b0b5013d1a7bb'),
+    text: 'Write code',
+    done: true
+  },
+  {
+    _id: ObjectId('6a28575ad01b0b5013d1a7bc'),
+    text: 'Learn about containers',
+    done: false
+  }
+]
+
+> db.todos.insertOne({ text: 'Increase the number of tools in my tool belt', done: false })
+{
+  acknowledged: true,
+  insertedId: ObjectId('6a2ada09596f42c3b1d1a7bb')
+}
+
+> db.todos.find({})
+[
+  {
+    _id: ObjectId('6a28575ad01b0b5013d1a7bb'),
+    text: 'Write code',
+    done: true
+  },
+  {
+    _id: ObjectId('6a28575ad01b0b5013d1a7bc'),
+    text: 'Learn about containers',
+    done: false
+  },
+  {
+    _id: ObjectId('6a2ada09596f42c3b1d1a7bb'),
+    text: 'Increase the number of tools in my tool belt',
+    done: false
+  }
+]
+
+$ curl http://localhost:3123/todos
+[{"_id":"6a28575ad01b0b5013d1a7bb","text":"Write code","done":true},{"_id":"6a28575ad01b0b5013d1a7bc","text":"Learn about containers","done":false},{"_id":"6a2ada09596f42c3b1d1a7bb","text":"Increase the number of tools in my tool belt","done":false}]
