@@ -6,3 +6,4 @@ services:
       - 3123:3000
     environment:
       - MONGO_URL=mongodb://root:example@mongo:27017/the_database?authSource=admin
+      - REDIS_URL=redis://redis:6379
