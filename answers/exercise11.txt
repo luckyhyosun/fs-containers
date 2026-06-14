@@ -1,0 +1,31 @@
+hyosunkim@MacBookPro ~/l/f/t/todo-backend (main)> docker container ls -a
+CONTAINER ID   IMAGE                COMMAND                  CREATED        STATUS                    PORTS                                           NAMES
+16f95e850447   redis:8.0-rc1        "docker-entrypoint.s…"   27 hours ago   Created                                                                   romantic_sutherland
+44ebc0921845   redis                "docker-entrypoint.s…"   2 days ago     Up 2 days                 0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp     todo-backend-redis-1
+db70b1d8ad8c   todo-backend-image   "docker-entrypoint.s…"   3 days ago     Exited (1) 2 days ago                                                     todo-backend-todo-backend-1
+2493fdb35cf6   mongo                "docker-entrypoint.s…"   3 days ago     Up 2 days                 0.0.0.0:3456->27017/tcp, [::]:3456->27017/tcp   todo-backend-mongo-1
+2e407ae79d1d   nginx                "/docker-entrypoint.…"   3 days ago     Created                                                                   adoring_ishizaka
+fd28682bcdf0   todo-appuser         "docker-entrypoint.s…"   8 days ago     Created                                                                   practical_hamilton
+70f1c46f9dd9   ubuntu               "bash"                   11 days ago    Exited (127) 9 days ago                                                   hello-node
+hyosunkim@MacBookPro ~/l/f/t/todo-backend (main)> docker exec -it romantic_sutherland bash
+
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug romantic_sutherland
+    Learn more at https://docs.docker.com/go/debug-cli/
+Error response from daemon: container 16f95e850447d9a2f45d26f472f97e53319f3b93e8b4051e36f6d0eb40218c1a is not running
+hyosunkim@MacBookPro ~/l/f/t/todo-backend (main) [1]> docker exec -it romantic_sutherland bash
+
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug romantic_sutherland
+    Learn more at https://docs.docker.com/go/debug-cli/
+Error response from daemon: container 16f95e850447d9a2f45d26f472f97e53319f3b93e8b4051e36f6d0eb40218c1a is not running
+hyosunkim@MacBookPro ~/l/f/t/todo-backend (main) [1]> docker exec -it todo-backend-redis-1 redis-cli
+127.0.0.1:6379> KEYS *
+1) "added_todos"
+127.0.0.1:6379> GET added_todos
+"1"
+127.0.0.1:6379> SET added_todos 9001
+OK
+127.0.0.1:6379> DEL added_todos
+(integer) 1
+127.0.0.1:6379>
