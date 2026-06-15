@@ -62,3 +62,4 @@ typings/
 
 # lucky's configuration
 mongo_data/
+redis_data/
